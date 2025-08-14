@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Interactive Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f4f6f8;
+    }
+    header {
+      background: #2d3748;
+      color: white;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sidebar {
+      background: #1a202c;
+      color: white;
+      width: 220px;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding-top: 60px;
+    }
+    .sidebar a {
+      display: block;
+      padding: 1rem;
+      text-decoration: none;
+      color: white;
+    }
+    .sidebar a:hover {
+      background: #2d3748;
+    }
+    main {
+      margin-left: 220px;
+      padding: 1rem;
+    }
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    .kpi {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .charts, .activities, .filters-alerts {
+      margin-top: 1rem;
+      display: grid;
+      gap: 1rem;
+    }
+    .charts, .activities {
+      grid-template-columns: 2fr 1fr;
+    }
+    .card {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .filters-alerts {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    .alert-error {
+      background: #fed7d7;
+      color: #c53030;
+    }
+    .alert-warning {
+      background: #fefcbf;
+      color: #975a16;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Dashboard</h1>
+    <div>User: Rishi</div>
+  </header>
+
+  <div class="sidebar">
+    <a href="#">Dashboard</a>
+    <a href="#">Analytics</a>
+    <a href="#">Reports</a>
+    <a href="#">Settings</a>
+    <a href="#">Help</a>
+  </div>
+
+  <main>
+    <div class="kpis">
+      <div class="kpi"><h3>Sales</h3><p>$25,300</p></div>
+      <div class="kpi"><h3>Revenue</h3><p>$50,100</p></div>
+      <div class="kpi"><h3>Users</h3><p>1,200</p></div>
+      <div class="kpi"><h3>Uptime</h3><p>99.9%</p></div>
+    </div>
+
+    <div class="charts">
+      <div class="card"><canvas id="revenueChart"></canvas></div>
+      <div class="card"><canvas id="salesChart"></canvas></div>
+    </div>
+
+    <div class="activities charts">
+      <div class="card">
+        <h3>Recent Activities</h3>
+        <ul>
+          <li>Adam viewed a report - 3 min ago</li>
+          <li>Sarah updated a task - 28 min ago</li>
+          <li>Michael deleted a file - 1 hr ago</li>
+        </ul>
+      </div>
+      <div class="card">[Other Widget]</div>
+    </div>
+
+    <div class="filters-alerts">
+      <div class="card">[Filters]</div>
+      <div class="card alert-error">Error: Something went wrong!</div>
+      <div class="card alert-warning">Warning: Disk space is running out</div>
+    </div>
+  </main>
+
+  <script>
+    // Revenue Line Chart
+    const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+    new Chart(revenueCtx, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        datasets: [{
+          label: 'Revenue ($)',
+          data: [5000, 7000, 8000, 6500, 9000, 10000, 12000],
+          borderColor: '#4a90e2',
+          backgroundColor: 'rgba(74,144,226,0.1)',
+          fill: true,
+          tension: 0.3
+        }]
+      }
+    });
+
+    // Sales Bar Chart
+    const salesCtx = document.getElementById('salesChart').getContext('2d');
+    new Chart(salesCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        datasets: [{
+          label: 'Sales ($)',
+          data: [3000, 4000, 5000, 3500, 6000, 7500, 9000],
+          backgroundColor: '#2ecc71'
+        }]
+      }
+    });
+  </script>
+</body>
+</html>
